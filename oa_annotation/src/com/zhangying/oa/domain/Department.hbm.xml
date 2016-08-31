@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.zhangying.oa.domain.Department">
+		<id name="did" type="java.lang.Long" length="10">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="dname" type="java.lang.String" length="20"></property>
+		<property name="description" type="java.lang.String" length="120"></property>
+		
+		
+		<set name="users" cascade="all" inverse="true">
+			<key>
+				<column name="did"></column>
+			</key>
+			<one-to-many class="com.zhangying.oa.domain.User"/>
+		</set>
+	</class>
+</hibernate-mapping>

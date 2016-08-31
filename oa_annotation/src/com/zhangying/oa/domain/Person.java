@@ -1,0 +1,22 @@
+package com.zhangying.oa.domain;
+
+import java.io.Serializable;
+
+public class Person implements Serializable {
+	private String pname;
+	private Long pid;
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public Long getPid() {
+		return pid;
+	}
+	public void setPid(Long pid) {
+		this.pid = pid;
+	}
+	
+	
+}

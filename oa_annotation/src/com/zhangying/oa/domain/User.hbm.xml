@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.zhangying.oa.domain.User">
+		<id name="uid" type="java.lang.Long" length="10">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="username" type="java.lang.String" length="20"></property>
+		<property name="password" type="java.lang.String" length="20"></property>
+		<property name="email" type="java.lang.String" length="20"></property>
+		<property name="phone" type="java.lang.String" length="20"></property>
+		<property name="sex" type="java.lang.String" length="20"></property>
+		
+		<many-to-one name="department" class="com.zhangying.oa.domain.Department" column="did"></many-to-one>
+		<set name="posts" table="user_post">
+			<key>
+				<column name="uid"></column>
+			</key>
+			<many-to-many class="com.zhangying.oa.domain.Post" column="pid"></many-to-many>
+		</set>
+		<set name="menuItems" table="user_menuitem">
+			<key>
+				<column name="uid"></column>
+				
+			</key>
+			<many-to-many class="com.zhangying.oa.domain.MenuItem" column="mid"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
