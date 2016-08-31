@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+				            http://www.springframework.org/schema/beans/spring-beans.xsd
+				            http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+				            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+				            http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+
+<!-- 将天气查询的service发布webservice服务
+serviceClass：即webservice服务porttype
+address：webservice地址，访问地址：http://locahohst:8080/工程名/ws/weather
+weatherInterface：porttype实现类
+ -->
+<jaxws:server address="/weather" serviceClass="com.webservice.annotation.service.WeatherService">
+      <jaxws:serviceBean>
+      	<ref bean="weatherService"/>
+      </jaxws:serviceBean>
+</jaxws:server>
+
+
+<!-- 天气查询的客户端
+serviceClass：即公网天气查询服务porttype
+ -->
+<jaxws:client id="weatherClient"  
+        address="http://www.webxml.com.cn/WebServices/WeatherWebService.asmx" 
+        serviceClass="cn.com.webxml.WeatherWebServiceSoap">
+</jaxws:client>
+
+
+<!-- 天气查询service -->
+<bean id="weatherService" class="com.webservice.annotation.service.WeatherServiceImpl">
+	<property name="weatherWebServiceSoap" ref="weatherClient"/>
+</bean>
+
+</beans>
